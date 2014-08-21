@@ -1,0 +1,45 @@
+<?php $popup = $this->getPopupActive(); ?>
+
+<?php if($popup) : ?>
+	
+	<?php 
+		$background = "";
+		$width = "";
+		$image = "";
+		if($popup['popup_image']){
+			$background = 'background:url('.Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."popup/".$popup['popup_image'].') top left no-repeat;';
+			$image = '<img src='.Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."popup/".$popup['popup_image'].' alt="" />';
+			if($popup['popup_image_width']) $width = 'width:'.$popup['popup_image_width'].'px; height:'.$popup['popup_image_height'].'px;';
+		} 
+	?>
+	
+	<div style="display:none;">
+		<div id="divPopup" style="<?php echo $background; ?> <?php echo $width; ?>">
+			<?php if($popup['popup_content_html']) echo $popup['popup_content_html']; ?>
+		</div>
+	</div>
+			
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery.fancybox({
+				'href': '#divPopup'
+			});
+			
+			
+			//Put value in popup_id input hidden
+            <?php if($popup['popup_id']): ?>  
+                if(jQuery("#popup_popup_id").length > 0){
+                    jQuery("#popup_popup_id").val(<?php echo $popup['popup_id']; ?>); 
+                }
+			<?php endif; ?>
+            
+			<?php if($popup['popup_url'] && !$popup['popup_newsletter']): ?>  
+				jQuery("#divPopup").click(function(){
+					_gaq.push(['_trackEvent', 'pop-up', 'link-popup', 'click-link-popup-<?php echo $popup['popup_id']?>']);
+					window.location.href = "<?php echo $popup['popup_url']; ?>";  
+				});
+			<?php endif; ?>
+		});
+	</script>
+	
+<?php endif; ?>

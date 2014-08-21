@@ -1,0 +1,56 @@
+/*
+ * Popup CSS
+ *
+ * Copyright (c) 2013 Etailers 
+ *
+ */
+
+#divPopup{
+	text-align: left;
+	position:relative;
+	overflow:hidden;
+}
+
+#divPopup .popup-newsletter{
+	text-align: left;
+	padding:10px;
+	position:relative;
+}
+
+#newsletterPopup {
+	/*position:relative;*/
+}
+
+#newsletterPopup .title-newsletter{
+	padding:10px 0;
+}
+
+#newsletterPopup .popup-email{
+}
+
+#newsletterPopup #popup_accept{
+	margin-right:5px;
+}
+
+#newsletterPopup .popup-terms{
+	padding:5px 0;
+}
+
+#newsletterPopup .popup-actions{
+	padding:10px 0;
+}
+
+
+#newsletterPopup button.button::-moz-focus-inner { padding:0; border:0; } /* FF Fix */
+#newsletterPopup button.button { -webkit-border-fit:lines; } /* <- Safari & Google Chrome Fix */
+#newsletterPopup button.button { overflow:visible; width:auto; border:0; padding:0; margin:0; background:transparent; cursor:pointer; }
+#newsletterPopup button.button span { float:left; height:21px; background:#b5b5b5; padding:0 0 0 4px; font:bold 12px/21px Arial, Helvetica, sans-serif; text-align:center; white-space:nowrap; color:#fff; }
+#newsletterPopup button.button span span { background-position:100% 0; padding:0 8px 0 4px; }
+
+#nsAjaxLoading{
+    width:80%;
+    margin:0 auto;
+    text-align:center;
+    padding:20px;
+    background:#fff;
+}

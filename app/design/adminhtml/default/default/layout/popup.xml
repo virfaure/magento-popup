@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <popup_adminhtml_popup_index>
+        <reference name="content">
+            <block type="popup/adminhtml_popup" name="popup" />
+        </reference>
+    </popup_adminhtml_popup_index>
+    
+    <popup_adminhtml_popup_edit>
+		<update handle="editor"/>
+        <reference name="left">
+           <!-- <block type="adminhtml/store_switcher" name="store_switcher" before="-"></block>-->
+        </reference>
+    </popup_adminhtml_popup_edit>
+        
+</layout>

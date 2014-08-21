@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Etailers
+ * @package    Etailers_Popup
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Etailers_Popup>
+            <version>0.1.0</version>
+        </Etailers_Popup>
+    </modules>
+    <frontend>
+		<translate>
+            <modules>
+                <Etailers_Popup>
+                    <files>
+                        <default>Etailers_Popup.csv</default>
+                    </files>
+                </Etailers_Popup>
+            </modules>
+        </translate>
+        <routers>
+            <popup>
+                <use>standard</use>
+                <args>
+                    <module>Etailers_Popup</module>
+                    <frontName>popup</frontName>
+                </args>
+            </popup>
+        </routers>
+        <layout>
+            <updates>
+                <popup>
+                    <file>popup.xml</file>
+                </popup>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<popup>
+				<use>admin</use>
+				<args>
+					<module>Etailers_Popup</module>
+					<frontName>popup</frontName>
+				</args>
+			</popup>
+        </routers>
+    </admin>
+    <adminhtml>
+		<translate>
+            <modules>
+                <Etailers_Popup>
+                    <files>
+                        <default>Etailers_Popup.csv</default>
+                    </files>
+                </Etailers_Popup>
+            </modules>
+        </translate>
+		<menu>
+            <utilities_etailers translate="title" module="popup">
+                <title>Utilities ET</title>
+                <sort_order>100</sort_order>
+                <children>
+                    <popup translate="title" module="popup">
+                        <title>Manage Popups Promotions</title>
+                        <action>popup/adminhtml_popup</action>
+                        <sort_order>1</sort_order>
+                    </popup>
+                </children>
+            </utilities_etailers>
+        </menu>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<utilities_etailers translate="title" module="popup">
+							<title>Utilities ET</title>
+							<sort_order>30</sort_order>
+							<children>
+								<popup translate="title">
+									<title>Manage Popups Promotions</title> 
+								</popup>
+							</children>
+						</utilities_etailers>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<popup>
+					<file>popup.xml</file>
+				</popup>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <popup>
+                <class>Etailers_Popup_Model</class>
+                <resourceModel>popup_mysql4</resourceModel>
+            </popup>
+            <newsletter>
+                <rewrite>
+                    <subscriber>Etailers_Popup_Model_Subscriber</subscriber>
+                </rewrite>
+            </newsletter>
+            <popup_mysql4>
+                <class>Etailers_Popup_Model_Mysql4</class>
+                <entities>
+                    <popup>
+                        <table>popup</table>
+                    </popup>
+                    <popup_store>
+                        <table>popup_store</table>
+                    </popup_store>
+                </entities>
+            </popup_mysql4>
+        </models>
+        <resources>
+            <popup_setup>
+                <setup>
+                    <module>Etailers_Popup</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </popup_setup>
+            <popup_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </popup_write>
+            <popup_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </popup_read>
+        </resources>
+        <blocks>
+            <popup>
+                <class>Etailers_Popup_Block</class>
+            </popup>
+            
+            <adminhtml>
+                <rewrite>
+                    <newsletter_subscriber_grid>Etailers_Popup_Block_Adminhtml_Newsletter_Subscriber_Grid</newsletter_subscriber_grid>
+                </rewrite>
+            </adminhtml>
+            
+        </blocks>
+        <helpers>
+            <popup>
+                <class>Etailers_Popup_Helper</class>
+            </popup>
+        </helpers>
+    </global>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/etailers/popup/popup.css</stylesheet></action> 
+			<action method="addJs"><script>jquery/plugins/fancybox.js</script></action>
+        </reference>
+		<reference name="before_body_end">
+			<block type="popup/popup" name="popup" template="etailers/popup/popup.phtml"></block>
+		</reference>
+	</default>
+</layout> 

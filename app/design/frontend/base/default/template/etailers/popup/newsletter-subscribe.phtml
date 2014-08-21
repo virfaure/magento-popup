@@ -1,0 +1,51 @@
+<form method="post" id="newsletterPopup">
+	<div class="title-newsletter"><?php echo $this->__('Sign up for our newsletter') ?></div>
+
+	<div class="popup-email">
+	   <input type="text" name="popup_email" id="popup_email" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" />
+	   <input type="hidden" name="popup_popup_id" id="popup_popup_id" value="" />
+	</div>
+	<div class="popup-terms">
+		<input type="checkbox" id="popup_accept" name="popup_accept" value="1" class="privacy required-entry" /><?php echo $this->__('I accept') ?> <a href="<?php echo $this->getBaseUrl() . $this->__('privacy-policy-link') ?>" title="<?php echo $this->__('privacy policy') ?>" target="_blank"><?php echo $this->__('privacy policy') ?></a>
+	</div>
+	<div class="popup-actions">
+		<button id="btn-popup-subscribe" type="button" onclick="newsletterPopup.submit();return false;" title="<?php echo $this->__('Subscribe') ?>" class="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+	</div>
+	
+	<div id="FormResponse"></div>
+</form>
+<script type="text/javascript">
+	var newsletterPopup = new VarienForm('newsletterPopup');
+	
+	newsletterPopup.submit = function(){
+		if (this.validator.validate()) {
+			//Track event
+			_gaq.push(['_trackEvent', 'pop-up', 'boton-popup', 'click-registrar-1']);
+			
+            // Div loading
+            jQuery("#newsletterPopup").hide();
+            jQuery("#divPopup").append('<div id="nsAjaxLoading"><img src="<?php echo $this->getSkinUrl('images/etailers/popup/ajax-loader.gif');?>" /><br /><br /><?php echo $this->__('Saving your subscription ...') ?></div>');
+                                 
+			// AJAX
+			new Ajax.Request('<?php echo $this->getFormActionUrl() ?>', 
+				{
+					method:'post', 
+					asynchronous:true, 
+					evalScripts:false, 
+					onComplete:function(request, json){
+						response = eval('(' + request.responseText + ')');
+						if(response.state != "success"){
+                            jQuery("#nsAjaxLoading").hide();
+                            jQuery("#newsletterPopup").show();
+							var html = '<ul class="messages"><li class="'+response.state+'-msg"><ul><li>' + response.message + '</li></ul></li></ul>';
+							$('FormResponse').update(html);
+						}else{
+							// IF OK => Redirect to response.redirect with Message in SESSION
+							window.location.href = response.redirect;
+						}
+					}, 
+					parameters:Form.serialize($('newsletterPopup'))
+			});
+		}
+	}.bind(newsletterPopup);
+</script>	
